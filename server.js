@@ -41,3 +41,6 @@ app.post("/quotes/search/echo", function (req, res) {
 
 
 // `You said:` + `(` + yourWord + `)` + `  and all of the results are :` + 
+
+// advanced level: use lodash library
+const lodash = require('lodash');
