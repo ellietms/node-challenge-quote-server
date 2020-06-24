@@ -33,7 +33,11 @@ app.post("/quotes/search", function (req, res) {
   res.send(filteredQuoets)
 });
 
-app.post("/quotes/search/echo",function (req, res) {
-  const searchResult = `${req.query.word}`;
-  res.send("You said:" + searchResult)
+app.post("/quotes/search/echo", function (req, res) {
+  const yourWord = `${req.query.word}`;
+  const allSearchResults = quotes.filter(eachQuote => eachQuote.quote.includes(yourWord))
+  res.send(allSearchResults);
 })
+
+
+// `You said:` + `(` + yourWord + `)` + `  and all of the results are :` + 
