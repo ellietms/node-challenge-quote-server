@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const quotes = require("./quotes.json");
+const cors = require('cors');
+app.use(cors());
 // advanced level: use lodash library
 
 const lodash = require('lodash');
@@ -36,10 +38,10 @@ app.post("/quotes/search", function (req, res) {
 app.post("/quotes/search/echo", function (req, res) {
   const yourWord = `${req.query.word}`;
   const allSearchResults = quotes.filter(eachQuote => eachQuote.quote.includes(yourWord))
-  res.send(allSearchResults);
+  res.json(`You said:` + `(` + yourWord + `)` + `  and all of the results are :` + JSON.stringify(allSearchResults));
 })
 
 
-// `You said:` + `(` + yourWord + `)` + `  and all of the results are :` + 
+//  + 
 
 
