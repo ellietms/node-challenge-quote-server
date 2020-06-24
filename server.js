@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const quotes = require("./quotes.json");
 
+// Level 100
+
 app.get("/",function (request, response) {
   response.send("Welcome to Ellie 's first back-end app")
 })
@@ -14,10 +16,6 @@ app.get("/quotes/random",function (request, response) {
   response.send(pickFromArray(quotes))
 })
 
-app.post("/favorite", function (req, res) {
-  console.log(req);
-  res.send(`My favorite is ${req.query.family}`);
-});
 
 function pickFromArray(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -26,3 +24,16 @@ function pickFromArray(arr) {
 const listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
 });
+
+// Level 200
+
+app.post("/quotes/search", function (req, res) {
+  const searchResult = `${req.query.term}`;
+  const filteredQuoets = quotes.filter(eachQuote => eachQuote.quote.includes(searchResult))
+  res.send(filteredQuoets)
+});
+
+app.post("/quotes/search/echo",function (req, res) {
+  const searchResult = `${req.query.word}`;
+  res.send("You said:" + searchResult)
+})
