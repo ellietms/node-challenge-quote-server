@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const quotes = require("./quotes.json");
+// advanced level: use lodash library
+
+const lodash = require('lodash');
+
 
 // Level 100
 
@@ -13,13 +17,9 @@ app.get("/quotes", function (request, response) {
 });
 
 app.get("/quotes/random",function (request, response) {
-  response.send(pickFromArray(quotes))
+  response.send(lodash.sample(quotes))
 })
 
-
-function pickFromArray(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 const listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
@@ -42,5 +42,4 @@ app.post("/quotes/search/echo", function (req, res) {
 
 // `You said:` + `(` + yourWord + `)` + `  and all of the results are :` + 
 
-// advanced level: use lodash library
-const lodash = require('lodash');
+
