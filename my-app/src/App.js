@@ -25,7 +25,7 @@ function App() {
          author : {Quote.author}
       </div>
       <button
-      className="my-2"
+      className=" button"
       onClick={() => newQuote()}>Get quotes</button>
     </div>
     </div>
