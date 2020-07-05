@@ -24,7 +24,6 @@ const listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
-
 // Level 200
 app.post("/quotes/search", function (req, res) {
   const searchResult = `${req.query.term}`;
@@ -49,4 +48,5 @@ app.post("/quotes/search/echo", function (req, res) {
   );
 });
 
-
+const port = process.env.PORT || 5000;
+app.listen(port);
