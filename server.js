@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongodb = require("mongodb");
 const quotes = require("./quotes.json");
+const uri = process.env.DATABASE_URI;
 
 // advanced level: use lodash library
 const cors = require("cors");
