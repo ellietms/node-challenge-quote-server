@@ -3,7 +3,8 @@ const app = express();
 const mongodb = require("mongodb");
 const quotes = require("./quotes.json");
 const uri = process.env.DATABASE_URI;
-
+require("dotenv").config();
+console.log(process.env);
 // advanced level: use lodash library
 const cors = require("cors");
 app.use(cors());
