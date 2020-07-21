@@ -48,26 +48,30 @@ const listener = app.listen(process.env.PORT, function () {
 });
 
 // Level 200
-app.post("/quotes/search", function (req, res) {
+app.post("/quotes/search", function (request, response) {
   const client = new  mongodb.MongoClient(uri,{ useUnifiedTopology: true });
   client.connect(() => {
     const db = client.db("quotes");
     const collection = db.collection("quotes");
-    collection.find({"quote" : {$regex : `.*${req.query.term}.*`}}).toArray((error,results) => {
-      res.send(error || results);
+    collection.find().toArray((error,quotes) => {
+      const term = request.query.term;
+      console.log(word);
+      const filteredQuotes = quotes.filter(eachQuote => eachQuote.quote.includes(term))
+      response.send(error || filteredQuotes);
       client.close();
     })
   })
 });
 
-app.post("/quotes/search/echo", function (req, res){
+app.post("/quotes/search/echo", function (request, response){
   const client = new mongodb.MongoClient(uri);
-  console.log(req.query.term);
   client.connect(() => {
     const db = client.db("quotes");
     const collection = db.collection("quotes");
-    collection.find({quote:req.query.term}).toArray((error,results) => {
-      res.json(error || results);
+    collection.find().toArray((error,quotes) => {
+      const word = request.query.word;
+      const filteredQuotes = quotes.filter(eachQuote => eachQuote.quote.includes(word));
+      response.json(error || filteredQuotes);
       client.close();
     })
   })
