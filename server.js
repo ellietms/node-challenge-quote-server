@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const mongodb = require("mongodb");
-const quotes = require("./quotes.json");
 const uri = process.env.DATABASE_URI;
 require("dotenv").config();
 console.log(process.env);
@@ -12,14 +11,27 @@ const lodash = require("lodash");
 
 // Level 100
 app.get("/", function (request, response) {
-  response.send("Welcome to Ellie 's first back-end app");
+  const client = new mongodb.MongoClient(uri);
+  client.connect(() =>{
+  response.send("Welcome to Ellie 's quote app");
+  client.close();
+  })
 });
 
 app.get("/quotes", function (request, response) {
-  response.send(quotes);
-});
+  const client = new mongodb.MongoClient(uri);
+  client.connect(() => {
+    const db = client.db("quotes");
+    const collection = db.collection("quotes");
+    collection.find().toArray((error, quotes) => {
+      response.json( quotes || error);
+      client.close();
+    });
+    })
+  })
 
 app.get("/quotes/random", function (request, response) {
+  
   response.send(lodash.sample(quotes));
 });
 
