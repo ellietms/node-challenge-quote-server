@@ -43,9 +43,7 @@ app.get("/quotes/random", function (request, response) {
   })
 });
 
-const listener = app.listen(process.env.PORT, function () {
-  console.log("Your app is listening on port " + listener.address().port);
-});
+
 
 // Level 200
 app.post("/quotes/search", function (request, response) {
@@ -77,7 +75,10 @@ app.post("/quotes/search/echo", function (request, response){
   })
 });
 
-const port = process.env.PORT || 5000;
-app.listen(port);
+const listener = app.listen(3000, function () {
+  console.log("Your app is listening on port " + listener.address().port);
+});
+// const port = process.env.PORT || 5000;
+// app.listen(port);
 
 
