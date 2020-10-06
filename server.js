@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const mongodb = require("mongodb");
 const uri = process.env.DATABASE_URI;
+const PORT = process.env.PORT;
 // advanced level: use lodash library
 const cors = require("cors");
 app.use(cors());
@@ -75,8 +76,8 @@ app.post("/quotes/search/echo", function (request, response) {
   });
 });
 
-const listener = app.listen(3000, function () {
-  console.log("Your app is listening on port " + listener.address().port);
+app.listen(PORT, () => {
+  console.log(`Server started on port: ${PORT}`);
 });
 // const port = process.env.PORT || 5000;
 // app.listen(port);
