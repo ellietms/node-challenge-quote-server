@@ -79,5 +79,3 @@ app.post("/quotes/search/echo", function (request, response) {
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });
-// const port = process.env.PORT || 5000;
-// app.listen(port);
